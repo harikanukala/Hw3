@@ -1,5 +1,5 @@
 <?php
-namespace cool_name_for_your_group\hw3\views;
+namespace cs_rockers\hw3\views;
 require_once 'View.php';
 
 class ImageView extends View
@@ -14,7 +14,8 @@ class ImageView extends View
           <meta charset="utf-8" />
         </head>
         <body>
-        <h2>Recent Images</h2>
+        <h2>Recent</h2>
+        <!-- <button type="button" href="" -->
         	<table class="recent" border="0" cellpadding="0" cellspacing="0">
             <tbody>
             <?php foreach ($data[0] as $recent): ?>
@@ -26,7 +27,7 @@ class ImageView extends View
             <?php endforeach; ?>
             </tbody>
         </table>
-    <h2>Top images</h2>
+    <h2>Popularity</h2>
         <table class="top" border="0" cellpadding="0" cellspacing="0">
             <tbody>
             <?php foreach ($data[1] as $top): ?>

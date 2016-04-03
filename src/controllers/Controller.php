@@ -1,6 +1,6 @@
 <?php
-namespace cool_name_for_your_group\hw3\controllers;
-use cool_name_for_your_group\hw3 as B;
+namespace cs_rockers\hw3\controllers;
+use cs_rockers\hw3 as B;
 
 abstract class Controller
 {

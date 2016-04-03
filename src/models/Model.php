@@ -1,5 +1,5 @@
 <?php
-namespace cool_name_for_your_group\hw3\models;
+namespace cs_rockers\hw3\models;
 
 class Model
 {

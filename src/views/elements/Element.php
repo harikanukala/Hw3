@@ -1,5 +1,5 @@
 <?php
-namespace cool_name_for_your_group\hw3\views\elements;
+namespace cs_rockers\hw3\views\elements;
 
 abstract class Element
 {

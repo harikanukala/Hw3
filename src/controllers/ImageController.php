@@ -1,6 +1,6 @@
 <?php
-namespace cool_name_for_your_group\hw3\controllers;
-use cool_name_for_your_group\hw3\models as B;
+namespace cs_rockers\hw3\controllers;
+use cs_rockers\hw3\models as B;
 require_once 'Controller.php';
 
 class ImageController extends Controller

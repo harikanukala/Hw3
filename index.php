@@ -1,6 +1,6 @@
 <?php
 
-namespace cool_name_for_your_group\hw3;
+namespace cs_rockers\hw3;
 
 require_once "src/controllers/ImageController.php";
 // defines for various namespaces
