@@ -1,0 +1,59 @@
+* {
+padding:0;
+margin:0;
+}
+.header{
+	margin:0 auto;
+	border-bottom: 5px solid #808080;
+	text-align:center;
+	
+}
+
+img.setting
+{	
+	height:20px;
+	width:80px;
+		
+	left:2in;
+}
+
+.signin
+{
+	float:right;
+	position: relative;
+	left:-1in;
+}
+h3
+{
+	text-align:center;
+	color: blue;
+	
+}
+.form_align
+{
+	text-align:center;
+	padding: 25px;
+    	border: 25px double green;
+    	margin: 25px;
+}
+
+.required
+{
+	color:red;
+}
+input[type=text] {
+  width: 100px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}
+input[type=text]:focus {
+  width: 250px;
+}
+input[type=password] {
+  width: 100px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}
+input[type=password]:focus {
+  width: 250px;
+}
