@@ -14,7 +14,7 @@ define(NS_BASE . "NS_MODELS", "cs_rockers\\hw3\\models\\");
 $controller = new $controller_name();
 $controller->processRequest();
 
-if(isset($_GET['mode']) && $_GET['mode']=='signup'){
+if($_GET['mode']=='signup'){
 	$controller_name = NS_CONTROLLERS . "SignupController";
 	$controller = new $controller_name();
 	$controller->processRequest();
