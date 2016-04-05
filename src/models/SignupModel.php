@@ -12,30 +12,24 @@ class SignupModel extends Model
         $result="";
         $name=trim($name);
         $this->openDb();
-        $sql="SELECT user_name FROM user WHERE user_name = '".$name."'";
+        $sql="SELECT user_name FROM users WHERE user_name = '".$name."'";
         
-        $result=mysqli_query($conn,$sql);
+        $result=mysqli_query($this->link,$sql);
         // TO check if table exists or not
         if (!$result) {
-        printf("Error: %s\n", mysqli_error($conn));
+        printf("Error: %s\n", mysqli_error($this->link));
         exit();
-    }
+        }
         $name_array=mysqli_fetch_array($result);
-         
-       //  To check if a user already exists
-      
-        
+       //  To check if a user already exists    
          if(mysqli_num_rows($result)>0)
         {
-            $result=0;
-            
+            $result=0;            
         }
         else
         {
-            $digits = 5;
-            $id=rand(pow(1, $digits-1), pow(10, $digits)-1);
-            $new_user="Insert into user(user_id,user_name,password) values ($id,'$name','$password')";
-            if(mysqli_query($conn,$new_user))
+            $new_user="Insert into users(user_name,password) values ('$name','$password')";
+            if(mysqli_query($this->link,$new_user))
             {
                 $result=1;
             }
@@ -45,7 +39,6 @@ class SignupModel extends Model
         }
      
       return $result;
-        mysqli_close($conn);  
       }
 
 }

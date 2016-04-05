@@ -20,4 +20,15 @@ class ImageModel extends Model
         }
         return array($recents,$top);
 	}
+
+    function saveImage($caption,$image_name,$user_name,$date)
+    {
+        $this->openDb();
+       if(mysqli_query($this->link,"INSERT INTO images (image_name,image_caption,avg_rating,
+        uploaded_by,uploaded_date) VALUES('$image_name','$caption',0,1,'$date') ")){
+       }
+       else{
+        echo mysqli_error();
+       }
+    }
 }

@@ -38,7 +38,7 @@ if (mysqli_query($link,$sql)) {
 		)';
 	if(mysqli_query($link,$sql)){
 		echo "Table images created successfully\n";
-		$sql="INSERT INTO images VALUES (1, '1', 'first pic',5,1,NOW()), (2, '2', 'one more',0,2,NOW())";
+		$sql="INSERT INTO images VALUES (1, '1.jpg', 'first pic',5,1,NOW()), (2, '2.jpg', 'one more',0,2,NOW())";
 		if(mysqli_query($link,$sql)){
 			echo "2 rows inserted in to images table\n";
 		}

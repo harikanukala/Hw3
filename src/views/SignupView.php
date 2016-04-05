@@ -34,7 +34,7 @@ class SignupView extends View
 <html>
 <head>
 <meta charset="UTF-8"/>
-<link rel="stylesheet" type="text/css" href="./styles/styles.css"/>
+<link rel="stylesheet" type="text/css" href="./src/styles/styles.css"/>
 <title> Image Rating </title>
 </head>
 <body>
@@ -65,7 +65,7 @@ class SignupView extends View
    }
    ?>
 <h3> Please Fill The Form</h3> <br><br>
-<form name="fname" action="index.php" method="POST">
+<form name="fname" action="#" method="POST">
 <div class="form_align">
 <label for="name">Enter name</label>
 <input type="text" id="name" name="name" placeholder="Enter Name"><span class="required">*
@@ -97,7 +97,6 @@ class SignupView extends View
         {
             echo  $confirm_password;
         }
-
 ?>
 </span><br><br>
 <input type="submit" name="submit">
@@ -105,9 +104,7 @@ class SignupView extends View
  
         if ($_SERVER["REQUEST_METHOD"] == "POST" && !$name_err && !$pwd_err && !$confirm_err && !$confirm_password )
         {
-        
-         return [$_SERVER["REQUEST_METHOD"] == "POST",$_POST["name"],$_POST["password"]];
-        
+         return [$_SERVER["REQUEST_METHOD"] == "POST",$_POST["name"],$_POST["password"]];        
         }
      ?>
 

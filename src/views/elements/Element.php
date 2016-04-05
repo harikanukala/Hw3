@@ -3,7 +3,7 @@ namespace cs_rockers\hw3\views\elements;
 
 abstract class Element
 {
-	public $view;
+	// public $view;
 
     public function __construct(){
         $this->view = $view;
