@@ -41,6 +41,32 @@ class SignupModel extends Model
      
       return $result;
       }
+      
+      public function ValidateCredentials($name,$password)
+      {
+         $result="";
+        $name=trim($name);
+        $this->openDb();
+        $sql="SELECT user_name,password FROM users WHERE user_name = '".$name."' and password='".$password."'"  ;
+        
+        $result=mysqli_query($this->link,$sql);
+        // TO check if table exists or not
+        if (!$result) {
+        printf("Error: %s\n", mysqli_error($this->link));
+        exit();
+        }
+        $name_array=mysqli_fetch_array($result);
+       if(mysqli_num_rows($result)>0)
+        {
+            $result=3;    
+        }
+        else{
+            $result=4;
+        }
+        
+        return $result;
+          
+      }
 
 }
  

@@ -19,7 +19,16 @@ class SignupView extends View
    
     {
         echo "<br/>User registered successfully";
+       exit();
+       
+      
+    }
+    elseif($data == 4)
+   
+    {
+        echo "<br/>User ".$_POST["user_name"]." does not exist";
         exit();
+        
     }
     else
     {
@@ -40,7 +49,13 @@ class SignupView extends View
 <body>
 <?php
    $name_err=$pwd_err=$confirm_err=$confirm_password="";
+   $login_name_err=$login_pwd_err="";
+   $check_submit=0;
+
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+       if (isset($_POST["register"]))
+       {
+       $check_submit=1;
     if(empty($_POST["name"]))
         {
            $name_err ="Name is required";
@@ -61,17 +76,41 @@ class SignupView extends View
         else{
             
         }
+   }
+       if (isset($_POST["login"]))
+       {
         
+        if(empty($_POST["user_name"]))
+        {
+           $login_name_err ="Name is required";
+         //  echo $name_err;
+        }
+       
+        if(empty($_POST["user_password"]))
+        {
+            $login_pwd_err=" Password is required";
+        }
+       
+       }
+       else
+       {
+           
+       }
+       
    }
    ?>
-<h3> Please Fill The Form</h3> <br><br>
+
+<h3> Please Sign up</h3> <br/>
 <form name="fname" action="#" method="POST">
 <div class="form_align">
 <label for="name">Enter name</label>
 <input type="text" id="name" name="name" placeholder="Enter Name"><span class="required">*
 
   <?php 
-   echo $name_err;     
+  if (isset($_POST["register"]))
+       {
+   echo $name_err; 
+       }   
 
  ?>
 </span><br><br>
@@ -79,8 +118,10 @@ class SignupView extends View
 <input type="password" id="password" name="password" placeholder="Enter Password"><span class="required">*
 
     <?php  
+    if (isset($_POST["register"]))
+       {
       echo $pwd_err;
-  
+       }
    ?>
 
 </span><br><br>
@@ -89,6 +130,8 @@ class SignupView extends View
 <input type="password" id="confirm" name="confirm" placeholder="Confirm Password"><span class="required">*
 
 <?php 
+    if (isset($_POST["register"]))
+       {
        if ($confirm_err)
         {
           echo $confirm_err;
@@ -97,19 +140,63 @@ class SignupView extends View
         {
             echo  $confirm_password;
         }
+       }
 ?>
 </span><br><br>
-<input type="submit" name="submit">
+<input type="submit" name="register" value="register">
 <?php
  
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && !$name_err && !$pwd_err && !$confirm_err && !$confirm_password )
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"]) && !$name_err && !$pwd_err && !$confirm_err && !$confirm_password ) 
         {
-         return [$_SERVER["REQUEST_METHOD"] == "POST",$_POST["name"],$_POST["password"]];        
+                return [$_SERVER["REQUEST_METHOD"] == "POST",$_POST["register"],$_POST["name"],$_POST["password"]];        
+            
         }
-     ?>
+ ?>
 
 </div>
+<br/>
+
 </form>
+
+<h3> Please Sign in</h3> <br/>
+<form name="fname" action="#" method="POST">
+
+<div class="form_align">
+<label for="user_name">Enter name</label>
+<input type="text" id="user_name" name="user_name" placeholder="Enter Name"><span class="required">*
+
+  <?php 
+  if(isset($_POST["login"]))
+  {
+   echo $login_name_err;     
+  }
+
+ ?>
+</span><br><br>
+<label for="user_password">Enter password</label>
+<input type="password" id="password" name="user_password" placeholder="Enter Password"><span class="required">*
+
+    <?php  
+    if(isset($_POST["login"]))
+    {
+      echo $login_pwd_err;
+    }
+   ?>
+   </span><br/><br/>
+<input type="submit" name="login" value="login">
+<?php
+ 
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && !$name_err && !$pwd_err)
+        {
+         
+         return [$_SERVER["REQUEST_METHOD"] == "POST", $_POST["login"],$_POST["user_name"],$_POST["user_password"]];        
+        }
+     
+     ?>
+
+</div>     
+</form>
+
 </body>
 </html>
    <?php

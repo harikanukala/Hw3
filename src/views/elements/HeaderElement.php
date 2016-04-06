@@ -20,8 +20,9 @@ class HeaderElement extends Element{
 		<div class="header">
 		 <h1> <img class="setting" src="./src/resources/cool_logo.ico" alt="logo" /> Image Rating</h1>
 		</div>
+<<<<<<< HEAD
 		<?php if(!isset($_COOKIE[$cookie_name])){
-		 Echo "<a href=".$_SERVER['PHP_SELF']."?mode=signup>Sign-up</a> ";
+		 Echo "<a href=".$_SERVER['PHP_SELF']."?mode=signup>Sign-Up / Sign-In</a> ";
 		}
 		if(isset($_COOKIE[$cookie_name])){
 		 Echo "<a href=".$_SERVER['PHP_SELF'].">logout</a> ";
