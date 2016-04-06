@@ -10,11 +10,14 @@ class ImageController extends Controller
 	{
 		$model_name=$this->model("image");
 			$this->model=new $model_name();
-           
 		if(!isset($_GET['mode']))
 		{
 			$default=$this->model->getDefaultData();
 			$this->view("image")->render($default);
+			$cookie_name="user";
+			if(isset($_COOKIE[$cookie_name])){
+				unset($_COOKIE[$cookie_name]);
+			}
 		}
 		if(isset($_GET['mode']) && $_GET['mode']=='upload')
 		{
@@ -43,12 +46,18 @@ class ImageController extends Controller
 			} else {
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 			        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-			    $this->model->saveImage($_POST["caption"],$_FILES["fileToUpload"]["name"],1,time());
+			    $this->model->saveImage($_POST["caption"],$_FILES["fileToUpload"]["name"],$_COOKIE['user'],time());
 			    } else {
 			        echo "Sorry, there was an error uploading your file.";
 			    }
 			}
 			$this->view("safe")->render(null);
+		}
+		if(isset($_GET['mode']) && $_GET['mode']=='rate')
+		{
+			$this->model->saveRating($_GET['imageid'],$_GET['rated'],time());
+			unset($_GET['mode']);
+			header("Location:".$_SERVER['PHP_SELF']);
 		}
 	}
 }

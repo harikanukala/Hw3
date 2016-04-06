@@ -20,7 +20,6 @@ if ( isset($_GET["success"]))
 }
  $controller_name = NS_CONTROLLERS . "ImageController";
 $controller = new $controller_name();
-
 $controller->processRequest();
 
 if(isset($_GET['mode']) && $_GET['mode']=='signup'){
