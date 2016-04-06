@@ -12,14 +12,19 @@ define(NS_BASE . "NS_MODELS", "cs_rockers\\hw3\\models\\");
 $notifications="notifications";
 if ( isset($_GET["er"]))
 {
-  echo " <span style ='color:red; font-size:18'>User already exists. Please Sign-Up Again </span>";
+  echo " <span style ='color:red; font-size:18'>User already exists. Please Sign-Up Again. </span>";
 }
 if ( isset($_GET["success"]))
 {
-  echo " <span style ='color:red; font-size:18'>Successful Registration. Please Sign-In </span>";
+  echo " <span style ='color:red; font-size:18'>Successful Registration. Please Sign-In. </span>";
+}
+if ( isset($_GET["login"]))
+{
+  echo " <span style ='color:red; font-size:18'>Login Failed. Please Sign-In Again. </span>";
 }
  $controller_name = NS_CONTROLLERS . "ImageController";
 $controller = new $controller_name();
+
 $controller->processRequest();
 
 if(isset($_GET['mode']) && $_GET['mode']=='signup'){

@@ -23,36 +23,6 @@ class SignupView extends View
    $name_err=$pwd_err=$confirm_err=$confirm_password="";
    $login_name_err=$login_pwd_err="";
    $check_submit=0;
-     if($data>-1)
-     {
-       
-       if($data == 0)
-    {
-       
-       echo "<br/>This user already exists. Please Enter Different User Name";
-       header("Location:". $_SERVER['PHP_SELF']."?er=Error");
-      
-    }
-    elseif($data == 1)
-   
-    {
-       echo "<br/>User registered successfully";
-        header("Location:". $_SERVER['PHP_SELF']."?success=success");
-    }
-    elseif($data == 4)
-   
-    {
-        echo "<br/>User ".$_POST["user_name"]." does not exist";
-        exit();
-        
-    }
-    else
-    {
-         echo "<br/>Error adding user in database"; 
-         exit();
-    }
-   
-     }
      
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
        if (isset($_POST["register"]))
