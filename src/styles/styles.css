@@ -36,10 +36,17 @@ h3
     	border: 25px double green;
     	margin: 25px;
 }
+.notifications
+{
+	color:red;
+	font-weight:strong;
+	font size:18;
 
+}
 .required
 {
 	color:red;
+	
 }
 input[type=text] {
   width: 100px;

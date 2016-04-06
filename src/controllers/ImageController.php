@@ -10,6 +10,7 @@ class ImageController extends Controller
 	{
 		$model_name=$this->model("image");
 			$this->model=new $model_name();
+           
 		if(!isset($_GET['mode']))
 		{
 			$default=$this->model->getDefaultData();

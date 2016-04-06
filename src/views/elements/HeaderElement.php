@@ -16,7 +16,9 @@ class HeaderElement extends Element{
 		<div class="header">
 		 <h1> <img class="setting" src="./src/resources/cool_logo.ico" alt="logo" /> Image Rating</h1>
 		</div>
+        <div class="signin">
 		<?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=signup>Sign-Up / Sign-In</a> ";?>
+        </div>
 		<!-- <a href="./views/SignupView.php?id=signup">Sign-up</a> -->
 		</body>
 	</html>

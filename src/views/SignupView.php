@@ -1,27 +1,43 @@
 <?php
 namespace cs_rockers\hw3\views;
+
 require_once "View.php";
+
 class SignupView extends View
 {
   
     public function render($data)
     {
       
+    
+     ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" href="./src/styles/styles.css"/>
+<title> Image Rating </title>
+</head>
+<body>
+<?php
+   $name_err=$pwd_err=$confirm_err=$confirm_password="";
+   $login_name_err=$login_pwd_err="";
+   $check_submit=0;
      if($data>-1)
      {
        
        if($data == 0)
     {
+       
        echo "<br/>This user already exists. Please Enter Different User Name";
-        exit();
+       header("Location:". $_SERVER['PHP_SELF']."?er=Error");
+      
     }
     elseif($data == 1)
    
     {
-        echo "<br/>User registered successfully";
-       exit();
-       
-      
+       echo "<br/>User registered successfully";
+        header("Location:". $_SERVER['PHP_SELF']."?success=success");
     }
     elseif($data == 4)
    
@@ -38,20 +54,6 @@ class SignupView extends View
    
      }
      
-     ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-<link rel="stylesheet" type="text/css" href="./src/styles/styles.css"/>
-<title> Image Rating </title>
-</head>
-<body>
-<?php
-   $name_err=$pwd_err=$confirm_err=$confirm_password="";
-   $login_name_err=$login_pwd_err="";
-   $check_submit=0;
-
    if ($_SERVER["REQUEST_METHOD"] == "POST") {
        if (isset($_POST["register"]))
        {
@@ -156,10 +158,10 @@ class SignupView extends View
 </div>
 <br/>
 
-</form>
+
 
 <h3> Please Sign in</h3> <br/>
-<form name="fname" action="#" method="POST">
+
 
 <div class="form_align">
 <label for="user_name">Enter name</label>
