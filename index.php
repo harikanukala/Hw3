@@ -10,11 +10,11 @@ define(NS_BASE . "NS_CONTROLLERS", "cs_rockers\\hw3\\controllers\\");
 define(NS_BASE . "NS_VIEWS", "cs_rockers\\hw3\\views\\");
 define(NS_BASE . "NS_MODELS", "cs_rockers\\hw3\\models\\");
 
-    $controller_name = NS_CONTROLLERS . "ImageController";
+$controller_name = NS_CONTROLLERS . "ImageController";
 $controller = new $controller_name();
 $controller->processRequest();
 
-if($_GET['mode']=='signup'){
+if(isset($_GET['mode']) && $_GET['mode']=='signup'){
 	$controller_name = NS_CONTROLLERS . "SignupController";
 	$controller = new $controller_name();
 	$controller->processRequest();

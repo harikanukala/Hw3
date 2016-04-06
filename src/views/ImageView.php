@@ -28,7 +28,11 @@ class ImageView extends View
                 <tr>
                     <td><img src="./src/resources/<?php print htmlentities($recent->image_name);?>"/></td>
                     <td><h3>Caption</h3><?php print htmlentities($recent->image_caption); ?></td>
-                    <td><h3>Rate</h3><?php print htmlentities($recent->avg_rating); ?></td>
+                    <td><h3>Rate:</h3><?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$recent->image_id.">1</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=2&imageid=".$recent->image_id.">2</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$recent->image_id.">3</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$recent->image_id.">4</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";?> </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -40,7 +44,11 @@ class ImageView extends View
                 <tr>
                     <td><img src="./src/resources/<?php print htmlentities($top->image_name);?>"/></td>
                     <td><h3>Caption</h3><?php print htmlentities($top->image_caption); ?></td>
-                    <td><h3>Rate</h3><?php print htmlentities($top->avg_rating); ?></td>
+                    <td><h3>Rate:</h3><?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$recent->image_id.">1</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=2&imageid=".$recent->image_id.">2</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$recent->image_id.">3</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$recent->image_id.">4</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";?> </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

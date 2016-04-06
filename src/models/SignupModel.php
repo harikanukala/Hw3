@@ -8,7 +8,7 @@ class SignupModel extends Model
 
       public function InsertCredentials($name,$password)
       {
-        
+        $cookie_name="user";
         $result="";
         $name=trim($name);
         $this->openDb();
@@ -32,6 +32,7 @@ class SignupModel extends Model
             if(mysqli_query($this->link,$new_user))
             {
                 $result=1;
+                setcookie($cookie_name,$name,time() + (86400 * 30), "/");
             }
             else{
                 $result=2;
