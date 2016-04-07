@@ -6,7 +6,10 @@ class Model
 	public $link=NULL;
     function openDb() 
     {
-        $this->link = mysqli_connect('localhost','root','yes');
+        $servername = ini_get("mysql.default_host");
+        $username = ini_get("mysql.default_user");
+        $password =  ini_get("mysql.default_password");
+        $this->link = mysqli_connect($servername,'root',$password);
 		if (!$this->link) {
 		    die('Could not connect: ' . mysqli_connect_error());
 		}

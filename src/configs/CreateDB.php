@@ -1,6 +1,10 @@
 <?php
+$servername = ini_get("mysql.default_host");
+$username = ini_get("mysql.default_user");
+$password =  ini_get("mysql.default_password");
 
-$link = mysqli_connect('localhost','root','yes');
+$link = mysqli_connect($servername,'root',$password);
+//$link = mysqli_connect('localhost','root','yes');
 if (!$link) {
     die('Could not connect: ' . mysqli_connect_error());
 }
