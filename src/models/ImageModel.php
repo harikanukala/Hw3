@@ -5,7 +5,7 @@ require_once 'Model.php';
 
 class ImageModel extends Model
 {
-	function getDefaultData()
+	public function getDefaultData()
 	{
 		$this->openDb();
         $dbRecent = mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date,rates/(select count(*) from ratings where image_id=i.image_id) as avg_rating FROM user,images i WHERE user_id=uploaded_by ORDER BY image_id DESC LIMIT 3");
@@ -40,7 +40,7 @@ class ImageModel extends Model
         }
 	}
 
-    function saveImage($caption,$image_name,$user_name)
+    public function saveImage($caption,$image_name,$user_name)
     {
         $this->openDb();
         $defaultRate=0;
@@ -53,7 +53,7 @@ class ImageModel extends Model
        }
     }
 
-    function saveRating($imageid,$rate)
+    public function saveRating($imageid,$rate)
     {
         $this->openDb();
         $userid=$_COOKIE["user"];
@@ -68,7 +68,7 @@ class ImageModel extends Model
         }
     }
 
-    function getCount($data){
+    public function getCount($data){
         $this->openDb();
          $count=mysqli_query($this->link,"SELECT COUNT(*) AS count FROM ratings WHERE image_id=$data");
             $var=array();
