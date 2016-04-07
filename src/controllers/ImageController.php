@@ -46,7 +46,7 @@ class ImageController extends Controller
 			    echo "Sorry, your file was not uploaded.";
 			} else {
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    image_fix_orientation('10.jpg');
+			    	$this->image_fix_orientation($target_file);
 			        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 			    $this->model->saveImage($_POST["caption"],$_FILES["fileToUpload"]["name"],$_COOKIE['user'],time());
 			    } else {
@@ -63,7 +63,8 @@ class ImageController extends Controller
 		}
         
 	}
-    function image_fix_orientation($path){
+function image_fix_orientation($path)
+	{
 	$image = imagecreatefromjpeg($path);
 	$exif = exif_read_data($path);
     $ort = $exif['Orientation'];
@@ -81,21 +82,14 @@ class ImageController extends Controller
             $image = imagerotate($image,-90,0);
             break;
         default:
-            $image = imagerotate($image,0,0);
-            
+            $image = imagerotate($image,0,0);           
             break;
     } 
-    list($width,$height)=getimagesize($fname);
+    list($width,$height)=getimagesize($path);
     $new_width=500;
     $new_height=($height/$width)*$new_width;
     $temp=imagecreatetruecolor($new_width,$new_height);
-    $target_dir = "C:/xampp/htdocs/exif/27.jpg";
-    imagejpeg($temp,$target_dir,100);
-    imagedestroy($temp);
-    imagedestroy($image);
-}
- 
-// For JPEG image only
-image_fix_orientation('10.jpg');
-
+    imagecopyresampled($temp, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+    imagejpeg($temp,$path,100);
+	}
 }

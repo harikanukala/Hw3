@@ -24,7 +24,7 @@ class ImageView extends View
         <body>
         <?php if(isset($_COOKIE["user"])){
          Echo "<form action=".$_SERVER['PHP_SELF'].">
-        <input type='submit' name='mode' value='Upload'/>
+        <input type='submit' name='mode' value='upload'/>
      </form>";
      }
      $recent=new helpers\ImageViewHelper();

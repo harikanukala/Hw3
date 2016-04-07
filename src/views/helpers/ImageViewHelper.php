@@ -3,10 +3,10 @@ namespace cs_rockers\hw3\views\helpers;
 
 class ImageViewHelper extends Helper
 {
-	function render($data){
-		?>
-			<h2>Recent</h2>
-	        <table class="recent" border="0" cellpadding="0" cellspacing="0">
+    function render($data){
+        ?>
+            <h2>Recent</h2>
+            <table class="recent" border="0" cellpadding="0" cellspacing="0">
             <tbody>
             <?php foreach ($data[0] as $recent): ?>
                 <tr>

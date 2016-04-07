@@ -1,0 +1,48 @@
+
+Harika:
+
+1. 	User should be able to see top images and recent images by default
+	ImageController-"processRequest" calls the respective model method
+	ImageModel- "getDefaultData" method to query top3 and recent images [with rating 	and image data]
+	view-renders "ImageView" page
+
+2. 	User must be able to upload images
+	UploadView-file upload with caption and calls controller
+	ImageController-check constraints of image(size and type) and calls model if 		valid(POST-REDIRECT-GET)
+	ImageModel-"saveImage" saves using insert query and save in to resource folder
+	View-safe page. Ask for more upload and also give link to main page
+
+3. 	User must be able to rate images
+	View-user must able to rate which also submit the rating
+	ImageController-calls the model method
+	ImageModel-"saveRating" save using insert into Rating table
+	View-Reflect the avg_rating and not editable since he rated
+
+4. 	User must be able to view upload and also able to rate only after he/she logged in
+	Used cookie to store user data when logs in and then only show upload and rate 		system.
+
+Ashish:
+
+1. 	User should be able to create account (Sign up)
+	UserController-“InsertCredentials” calls the model method(POST-REDIRECT-GET)
+	UserModel-saves the user using insert query to db
+	View-default page.
+
+2.	Form Validations and Data Sanitization
+
+3. 	Created styles.CSS
+
+4.	Worked on image orientation and image resizing using xif data
+
+
+Suchita:
+
+1. 	User must be able to Sign in
+	UserController-"checkUser" calls the model
+	UserModel=“CheckCredentials” by select query	
+	View-if exists-default page else-error message
+	[and user must not able to view rate dropdown which is already rated by him]
+
+2.	Form Validations and Data Sanitization
+
+3.	Worked on image orientation and image resizing using xif data
