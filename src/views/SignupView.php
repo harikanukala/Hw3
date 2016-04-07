@@ -158,7 +158,7 @@ class SignupView extends View
 <input type="submit" name="login" value="login">
 <?php
  
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && !$name_err && !$pwd_err)
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && !$login_name_err && !$login_pwd_err)
         {
          
          return [$_SERVER["REQUEST_METHOD"] == "POST", $_POST["login"],$_POST["user_name"],$_POST["user_password"]];        
