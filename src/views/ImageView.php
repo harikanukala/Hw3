@@ -37,6 +37,8 @@ class ImageView extends View
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$recent->image_id.">3</a> 
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$recent->image_id.">4</a>  
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";}?> </td>
+                     <td><h3>Uploaded By</h3><?php print htmlentities($recent->user_name); ?></td>
+                     <td><h3>Uploaded Date</h3><?php print htmlentities($recent->uploaded_date); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -54,6 +56,8 @@ class ImageView extends View
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$top->image_id.">3</a> 
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$top->image_id.">4</a>  
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$top->image_id.">5</a>";}?> </td>
+                <td><h3>Uploaded By</h3><?php print htmlentities($top->user_name); ?></td>
+                <td><h3>Uploaded Date</h3><?php print htmlentities($top->uploaded_date); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

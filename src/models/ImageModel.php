@@ -19,13 +19,13 @@ class ImageModel extends Model
                 $top[] = $obj;
         }
         if(!isset($_COOKIE["user"]))
-        {           
-    		
+        {              		
             return array($recents,$top,array());
         }
         elseif (isset($_COOKIE["user"])) 
         {
             $userid=$_COOKIE["user"];
+            $unRateImages=array();
             $nonRatedImageids=mysqli_query($this->link,"SELECT a.image_id FROM (SELECT 
                 u.user_id,i.image_id FROM user u,images i) a LEFT JOIN (SELECT user_id,
                 image_id FROM ratings) b ON a.image_id=b.image_id AND a.user_id=b.user_id
@@ -34,8 +34,8 @@ class ImageModel extends Model
                 $unRateImages[] = $obj;
             }
             $array=array();
-            foreach ($unRateImages as $value) 
-                $array[] = $value->image_id;
+                foreach ($unRateImages as $value) 
+                    $array[] = $value->image_id;
             return array($recents,$top,$array);
         }
 	}
@@ -44,8 +44,9 @@ class ImageModel extends Model
     {
         $this->openDb();
         $defaultRate=0;
+        $userid=$_COOKIE["user"];
        if(mysqli_query($this->link,"INSERT INTO images (image_name,image_caption,rates,
-        uploaded_by,uploaded_date) VALUES('$image_name','$caption',$defaultRate,1,'$date') ")){
+        uploaded_by,uploaded_date) VALUES('$image_name','$caption',$defaultRate,$userid,'$date') ")){
        }
        else{
         echo mysqli_error();
