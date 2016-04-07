@@ -22,10 +22,18 @@ class SignupController extends Controller
                 if($submit=="register")
                 {
                 $user_notifications=$class_name->InsertCredentials($name,$password);
-                echo $user_notifications;
-                $form_variables_array= $this->view("signup")->render($user_notifications);
-                
-                return "Signup Validator WORKED";
+                 if($user_notifications == 0)
+                {
+                   header("Location:". $_SERVER['PHP_SELF']."?er=Error");
+                  
+                }
+                if($user_notifications == 1)
+               
+                {
+                  header("Location:". $_SERVER['PHP_SELF']."?success=success");
+                }
+             //   $form_variables_array= $this->view("signup")->render($user_notifications);
+               
                 }
                 
                 if ($submit=="login")
@@ -33,15 +41,18 @@ class SignupController extends Controller
                     $user_notifications=$class_name->ValidateCredentials($name,$password);
                     if ($user_notifications==4)
                     {
-                        $form_variables_array= $this->view("signup")->render($user_notifications);
-                        
+                        header("Location:". $_SERVER['PHP_SELF']."?login=fail");
+   
                     }
+                       // $form_variables_array= $this->view("signup")->render($user_notifications);
+                        
+                    
                     else
                     {
                        // $host  = $_SERVER['HTTP_HOST'];
                         //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
                         //$extra = 'index.php';
-                        header("Location:". $_SERVER['PHP_SELF']."?cookie=".$_COOKIE["user"]);
+                        header("Location:". $_SERVER['PHP_SELF'].);
                        //header("Location: http://localhost/cs_rockers/hw3/index.php");
                     }
                     

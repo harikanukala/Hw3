@@ -8,7 +8,6 @@ class SignupModel extends Model
 
       public function InsertCredentials($name,$password)
       {
-
         $result="";
         $name=trim($name);
         $this->openDb();
@@ -33,9 +32,7 @@ class SignupModel extends Model
             {
                 $result=1;
             }
-            else{
-                $result=2;
-            }
+           
         }
      
       return $result;
