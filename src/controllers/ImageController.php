@@ -9,9 +9,9 @@ class ImageController extends Controller
 	function processRequest()
 	{
 		$model_name=$this->model("image");
-			$this->model=new $model_name();
+		$this->model=new $model_name();
 
-		if(!isset($_GET['mode']))
+		if((!isset($_GET['mode'])) || ( isset($_GET['mode']) && $_GET['mode']=='logout' ))
 		{
 			$default=$this->model->getDefaultData();
 			$this->view("image")->render($default);

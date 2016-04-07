@@ -6,7 +6,7 @@ abstract class Element
 	// public $view;
 
     public function __construct(){
-        $this->view = $view;
+        //$this->view = $view;
     }
     
     public abstract function render($data);

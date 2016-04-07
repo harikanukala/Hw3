@@ -21,18 +21,22 @@ class ImageView extends View
         </head>
         <body>
         <h2>Recent</h2>
-        <?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=upload>Upload</a> ";?> 
+        <?php if(isset($_COOKIE["user"])){
+         Echo "<a href=".$_SERVER['PHP_SELF']."?mode=upload>Upload</a> ";
+     }?> 
         	<table class="recent" border="0" cellpadding="0" cellspacing="0">
             <tbody>
             <?php foreach ($data[0] as $recent): ?>
                 <tr>
                     <td><img src="./src/resources/<?php print htmlentities($recent->image_name);?>"/></td>
                     <td><h3>Caption</h3><?php print htmlentities($recent->image_caption); ?></td>
-                    <td><h3>Rate:</h3><?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$recent->image_id.">1</a>  
+                    <td><?php
+                     if(isset($_COOKIE["user"]) && in_array($recent->image_id,$data[2])){
+                      Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$recent->image_id.">1</a>  
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=2&imageid=".$recent->image_id.">2</a> 
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$recent->image_id.">3</a> 
                      <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$recent->image_id.">4</a>  
-                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";?> </td>
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";}?> </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -44,11 +48,12 @@ class ImageView extends View
                 <tr>
                     <td><img src="./src/resources/<?php print htmlentities($top->image_name);?>"/></td>
                     <td><h3>Caption</h3><?php print htmlentities($top->image_caption); ?></td>
-                    <td><h3>Rate:</h3><?php Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$recent->image_id.">1</a>  
-                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=2&imageid=".$recent->image_id.">2</a> 
-                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$recent->image_id.">3</a> 
-                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$recent->image_id.">4</a>  
-                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$recent->image_id.">5</a>";?> </td>
+                    <td><?php if(isset($_COOKIE["user"]) && in_array($top->image_id,$data[2])){
+                     Echo "<a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=1&imageid=".$top->image_id.">1</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=2&imageid=".$top->image_id.">2</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=3&imageid=".$top->image_id.">3</a> 
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=4&imageid=".$top->image_id.">4</a>  
+                     <a href=".$_SERVER['PHP_SELF']."?mode=rate&rated=5&imageid=".$top->image_id.">5</a>";}?> </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

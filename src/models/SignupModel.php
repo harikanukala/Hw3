@@ -8,11 +8,11 @@ class SignupModel extends Model
 
       public function InsertCredentials($name,$password)
       {
-        $cookie_name="user";
+
         $result="";
         $name=trim($name);
         $this->openDb();
-        $sql="SELECT user_name FROM users WHERE user_name = '".$name."'";
+        $sql="SELECT user_name FROM user WHERE user_name = '".$name."'";
         
         $result=mysqli_query($this->link,$sql);
         // TO check if table exists or not
@@ -28,11 +28,10 @@ class SignupModel extends Model
         }
         else
         {
-            $new_user="Insert into users(user_name,password) values ('$name','$password')";
+            $new_user="Insert into user(user_name,password) values ('$name','$password')";
             if(mysqli_query($this->link,$new_user))
             {
                 $result=1;
-                setcookie($cookie_name,$name,time() + (86400 * 30), "/");
             }
             else{
                 $result=2;
@@ -44,10 +43,11 @@ class SignupModel extends Model
       
       public function ValidateCredentials($name,$password)
       {
-         $result="";
+        $cookie_name="user";
+        $result="";
         $name=trim($name);
         $this->openDb();
-        $sql="SELECT user_name,password FROM users WHERE user_name = '".$name."' and password='".$password."'"  ;
+        $sql="SELECT user_name,password FROM user WHERE user_name = '".$name."' and password='".$password."'"  ;
         
         $result=mysqli_query($this->link,$sql);
         // TO check if table exists or not
@@ -58,7 +58,9 @@ class SignupModel extends Model
         $name_array=mysqli_fetch_array($result);
        if(mysqli_num_rows($result)>0)
         {
-            $result=3;    
+            $result=3;
+            $id=$this->getUserId($name);
+            setcookie($cookie_name,$id,time() + (86400 * 30), "/"); 
         }
         else{
             $result=4;
@@ -66,6 +68,19 @@ class SignupModel extends Model
         
         return $result;
           
+      }
+
+      public function getUserId($name)
+      {
+        $this->openDb();
+        $sql=mysqli_query($this->link,"SELECT user_id FROM user WHERE user_name='".$name."' ");
+        $var=array();
+            while ( ($obj = mysqli_fetch_object($sql)) != NULL ) {
+                $var[] = $obj;
+            }
+            foreach ($var as $value) 
+                $array[] = $value->user_id;
+        return $array[0];
       }
 
 }

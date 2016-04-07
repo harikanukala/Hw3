@@ -24,7 +24,7 @@ class HeaderElement extends Element{
 		 Echo "<a href=".$_SERVER['PHP_SELF']."?mode=signup>Sign-Up / Sign-In</a> ";
 		}
 		if(isset($_COOKIE[$cookie_name])){
-		 Echo "<a href=".$_SERVER['PHP_SELF'].">logout</a> ";
+		 Echo "<a href=".$_SERVER['PHP_SELF']."?mode=logout>logout</a> ";
 		}?>
 		<!-- <a href="./views/SignupView.php?id=signup">Sign-up</a> -->
 		</body>

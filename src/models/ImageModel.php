@@ -8,38 +8,35 @@ class ImageModel extends Model
 	function getDefaultData()
 	{
 		$this->openDb();
-        if(!isset($_COOKIE["user"]))
-        {
-    		$dbRecent = mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM users,images WHERE user_id=uploaded_by ORDER BY image_id DESC LIMIT 3");
-            $dbTop=mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM users,images WHERE user_id=uploaded_by ORDER BY avg_rating DESC, image_id DESC LIMIT 10");
-            $recents = array();
-            $top=array();
-            while ( ($obj = mysqli_fetch_object($dbRecent)) != NULL ) {
-                $recents[] = $obj;
-            }
-            while ( ($obj = mysqli_fetch_object($dbTop)) != NULL ) {
+        $dbRecent = mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM user,images WHERE user_id=uploaded_by ORDER BY image_id DESC LIMIT 3");
+        $dbTop=mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM user,images i WHERE user_id=uploaded_by ORDER BY avg_rating/(select count(*) from ratings where image_id=i.image_id) DESC, image_id DESC LIMIT 10");
+        $recents = array();
+        $top=array();
+        while ( ($obj = mysqli_fetch_object($dbRecent)) != NULL ) {
+            $recents[] = $obj;
+        }
+        while ( ($obj = mysqli_fetch_object($dbTop)) != NULL ) {
                 $top[] = $obj;
-            }
-            return array($recents,$top,null);
+        }
+        if(!isset($_COOKIE["user"]))
+        {           
+    		
+            return array($recents,$top,array());
         }
         elseif (isset($_COOKIE["user"])) 
         {
             $userid=$_COOKIE["user"];
-            $dbRecent = mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM users,images WHERE user_id=uploaded_by ORDER BY image_id DESC LIMIT 3");
-            $dbTop=mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM users,images WHERE user_id=uploaded_by ORDER BY avg_rating DESC, image_id DESC LIMIT 10");
             $nonRatedImageids=mysqli_query($this->link,"SELECT a.image_id FROM (SELECT 
-                u.user_id,i.image_id FROM users u,images i) a LEFT JOIN (SELECT user_id,
+                u.user_id,i.image_id FROM user u,images i) a LEFT JOIN (SELECT user_id,
                 image_id FROM ratings) b ON a.image_id=b.image_id AND a.user_id=b.user_id
                  WHERE b.image_id IS NULL AND b.user_id IS NULL AND a.user_id=$userid");
-            $recents = array();
-            $top=array();
-            while ( ($obj = mysqli_fetch_object($dbRecent)) != NULL ) {
-                $recents[] = $obj;
+            while ( ($obj = mysqli_fetch_object($nonRatedImageids)) != NULL ) {
+                $unRateImages[] = $obj;
             }
-            while ( ($obj = mysqli_fetch_object($dbTop)) != NULL ) {
-                $top[] = $obj;
-            }
-            return array($recents,$top,$nonRatedImageids);
+            $array=array();
+            foreach ($unRateImages as $value) 
+                $array[] = $value->image_id;
+            return array($recents,$top,$array);
         }
 	}
 
@@ -60,11 +57,25 @@ class ImageModel extends Model
         $this->openDb();
         $userid=$_COOKIE["user"];
         if(mysqli_query($this->link,"INSERT INTO ratings (image_id,user_id,rate,rated_date) 
-            VALUES($imageid,1,$rate,'$date')")){
-
+            VALUES($imageid,$userid,$rate,'$date')")){
+            if(mysqli_query($this->link,"UPDATE images SET avg_rating=avg_rating+$rate WHERE image_id=$imageid"));
+                else
+                    mysqli_error();
         }
         else{
             echo mysqli_error();
         }
+    }
+
+    function getCount($data){
+        $this->openDb();
+         $count=mysqli_query($this->link,"SELECT COUNT(*) AS count FROM ratings WHERE image_id=$data");
+            $var=array();
+            while ( ($obj = mysqli_fetch_object($count)) != NULL ) {
+                $var[] = $obj;
+            }
+            foreach ($var as $value) 
+                $array[] = $value->count;
+            return $array[0];
     }
 }

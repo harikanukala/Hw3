@@ -1,4 +1,5 @@
 <?php
+
 $link = mysqli_connect('localhost','root','yes');
 if (!$link) {
     die('Could not connect: ' . mysqli_connect_error());
@@ -8,17 +9,17 @@ $sql = 'CREATE DATABASE HW3';
 if (mysqli_query($link,$sql)) {
     echo "Database HW3 created successfully\n";
     $db_selected=mysqli_select_db($link,'HW3');
-    $sql='CREATE TABLE users(
+    $sql='CREATE TABLE user(
      user_id int(5) NOT NULL AUTO_INCREMENT,
      user_name VARCHAR(50),
      password VARCHAR(50),
      PRIMARY KEY(user_id)
      )';
 	if(mysqli_query($link,$sql)){
-		echo "Table users created successfully\n";
-		$sql="INSERT INTO users VALUES (1, 'harika', 'p'),(2, 'suchita', 'p'),(3, 'ashish', 'p')";
+		echo "Table user created successfully\n";
+		$sql="INSERT INTO user VALUES (1, 'harika', 'p'),(2, 'suchita', 'p'),(3, 'ashish', 'p')";
 		if(mysqli_query($link,$sql)){
-			echo "3 rows inserted in to users table\n";
+			echo "3 rows inserted in to user table\n";
 		}
 		else {
 	    	echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
@@ -34,7 +35,7 @@ if (mysqli_query($link,$sql)) {
 		uploaded_by int(5),
 		uploaded_date TIMESTAMP,
 		PRIMARY KEY(image_id),
-		FOREIGN KEY (uploaded_by) REFERENCES users(user_id)
+		FOREIGN KEY (uploaded_by) REFERENCES user(user_id)
 		)';
 	if(mysqli_query($link,$sql)){
 		echo "Table images created successfully\n";
@@ -56,7 +57,7 @@ if (mysqli_query($link,$sql)) {
 		rated_date TIMESTAMP,
 		PRIMARY KEY(id),
 		FOREIGN KEY (image_id) REFERENCES images(image_id),
-		FOREIGN KEY (user_id) REFERENCES users(user_id)
+		FOREIGN KEY (user_id) REFERENCES user(user_id)
 		)';
 	if(mysqli_query($link,$sql)){
 		echo "Table ratings created successfully\n";
