@@ -2,7 +2,6 @@
 namespace cs_rockers\hw3\views;
 
 require_once "View.php";
-
 class SignupView extends View
 {
   

@@ -56,7 +56,7 @@ class ImageController extends Controller
 		}
 		if(isset($_GET['mode']) && $_GET['mode']=='rate')
 		{
-			$this->model->saveRating($_GET['imageid'],$_GET['rated'],time());
+			$this->model->saveRating($_GET['imageid'],$_GET['rated']);
 			unset($_GET['mode']);
 			header("Location:".$_SERVER['PHP_SELF']);
 		}

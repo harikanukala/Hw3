@@ -1,7 +1,6 @@
 <?php
 namespace cs_rockers\hw3\views;
 require_once 'View.php';
-
 class UploadView extends View
 {
 	function render($data)

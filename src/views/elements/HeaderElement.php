@@ -15,7 +15,7 @@ class HeaderElement extends Element{
 		</head>
 		<body>
 		<div class="header">
-		 <h1> <img class="setting" src="./src/resources/cool_logo.ico" alt="logo" /> Image Rating</h1>
+		 <h1> <img class="setting" src="./src/resources/logo.ico" alt="logo" /> Image Rating</h1>
 		</div>
 	<div class="signin">
 		<?php if(!isset($_COOKIE[$cookie_name])){
