@@ -31,7 +31,7 @@ if (mysqli_query($link,$sql)) {
 		image_id int(5) NOT NULL AUTO_INCREMENT,
 		image_name VARCHAR(50),
 		image_caption VARCHAR(100),
-		avg_rating FLOAT,
+		rates INT,
 		uploaded_by int(5),
 		uploaded_date TIMESTAMP,
 		PRIMARY KEY(image_id),

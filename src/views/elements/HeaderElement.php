@@ -4,6 +4,7 @@ namespace cs_rockers\hw3\views\elements;
 class HeaderElement extends Element{
 
 	public function render($data){
+		$cookie_name="user";
 		?>
 		<!DOCTYPE html>
 		<html>
@@ -16,7 +17,7 @@ class HeaderElement extends Element{
 		<div class="header">
 		 <h1> <img class="setting" src="./src/resources/cool_logo.ico" alt="logo" /> Image Rating</h1>
 		</div>
-<div class="signin">
+	<div class="signin">
 		<?php if(!isset($_COOKIE[$cookie_name])){
 		 Echo "<a href=".$_SERVER['PHP_SELF']."?mode=signup>Sign-Up / Sign-In</a> ";
 		}

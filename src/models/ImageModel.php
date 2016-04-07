@@ -9,7 +9,7 @@ class ImageModel extends Model
 	{
 		$this->openDb();
         $dbRecent = mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM user,images WHERE user_id=uploaded_by ORDER BY image_id DESC LIMIT 3");
-        $dbTop=mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM user,images i WHERE user_id=uploaded_by ORDER BY avg_rating/(select count(*) from ratings where image_id=i.image_id) DESC, image_id DESC LIMIT 10");
+        $dbTop=mysqli_query($this->link,"SELECT user_name,image_id,image_name,image_caption,uploaded_date FROM user,images i WHERE user_id=uploaded_by ORDER BY rates/(select count(*) from ratings where image_id=i.image_id) DESC, image_id DESC LIMIT 10");
         $recents = array();
         $top=array();
         while ( ($obj = mysqli_fetch_object($dbRecent)) != NULL ) {
@@ -44,7 +44,7 @@ class ImageModel extends Model
     {
         $this->openDb();
         $defaultRate=0;
-       if(mysqli_query($this->link,"INSERT INTO images (image_name,image_caption,avg_rating,
+       if(mysqli_query($this->link,"INSERT INTO images (image_name,image_caption,rates,
         uploaded_by,uploaded_date) VALUES('$image_name','$caption',$defaultRate,1,'$date') ")){
        }
        else{
@@ -58,7 +58,7 @@ class ImageModel extends Model
         $userid=$_COOKIE["user"];
         if(mysqli_query($this->link,"INSERT INTO ratings (image_id,user_id,rate,rated_date) 
             VALUES($imageid,$userid,$rate,'$date')")){
-            if(mysqli_query($this->link,"UPDATE images SET avg_rating=avg_rating+$rate WHERE image_id=$imageid"));
+            if(mysqli_query($this->link,"UPDATE images SET rates=rates+$rate WHERE image_id=$imageid"));
                 else
                     mysqli_error();
         }
